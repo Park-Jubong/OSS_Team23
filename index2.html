@@ -16,7 +16,7 @@
             margin: auto;
             border: 7px dashed rgb(112, 108, 108); 
             width: 375px; 
-            height: 225px; 
+            height: 255px; 
         }
         #holder2 { 
             display: block;
@@ -24,7 +24,7 @@
             margin-right: auto;
             border: 7px dashed rgb(112, 108, 108); 
             width: 375px; 
-            height: 225px; 
+            height: 255px;
         }
         #holder.hover { 
             border: 7px dashed rgb(135, 250, 4); 
@@ -45,7 +45,7 @@
     <p></p>
     <!--<textarea id="tbox" placeholder="Type your story here" name="tbox" rows="21" cols="50"></textarea>-->
     <!--<div id="holder2"></div>-->
-    <textarea id="holder2"></textarea>
+    <textarea id="holder2" placeholder="Type your story here"></textarea>
     <br/>
     <div class="mb-5">
 		<button id="start" class="btn btn-success mt-5 me-3"><i class="bi bi-caret-right-square"></i> Start</button>
@@ -129,6 +129,7 @@
 		document.querySelector("#start").addEventListener("click", () => {
 			// Set the text property with the value of the textarea
 			speech.text = document.querySelector("textarea").value;
+            speech.rate = 1.2
 			// Start Speaking
 			window.speechSynthesis.speak(speech);
 		});
