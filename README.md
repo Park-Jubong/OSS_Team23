@@ -6,7 +6,7 @@ And you can make your own book to read.
 ## How to Use
 1. In Main Page there are two parts. First, in the 'Read books in English' part, you can select a book, and in the 'Read the text' part, you can enter text to read.  
 2. If you select a book in the 'Read books in Engish' part, the cover and text of the book are provided and you can read the text.
-3. If you click the 'Make your book' button in the 'Read books in English' part, you can typing or'drag and drop' the text and the cover.
+3. If you click the 'Make your book' button in the 'Read books in English' part, you can typing or'drag and drop' the '.txt' file and the cover.
 ## Screenshots of Website  
 - **Main Page**  
 <img src = "https://user-images.githubusercontent.com/73635543/143480426-6ddf2dc7-337c-4e30-b71f-02c2c3babd9e.png" width= "250" height="350">  
