@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- Bootstrap CSS -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
+
+</head>
+<body>
+	<div style="text-align : center;">
+		<img src="photo2.png" class="rounded" width = "500" height ="500" alt="PiggyBook"/>
+	</div>
+</body>
+
+
+
+
+<html lang="en">
+
+<head>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" />
+	<link rel="stylesheet" href="index.css" />
+</head>
+
+<body class="container mt-5 bg-dark">
+	<p></p>
+	<nav class="navbar navbar-light bg-light">
+		<div class="container">
+			<span class="navbar-brand mb-0 h1"><i class="bi bi-megaphone"></i> Read the text</span>
+		</div>
+	</nav>
+	<select id="voices" class="form-select bg-secondary text-light"></select>
+
+    <!-- Range Slliders for Volume, Rate & Pitch -->
+    <div class="d-flex mt-4 text-light">
+		<div>
+			<p class="lead">Volume</p>
+			<input type="range" min="0" max="1" value="1" step="0.1" id="volume" />
+			<span id="volume-label" class="ms-2">1</span>
+		</div>
+			<div class="mx-5">
+			<p class="lead">Rate</p>
+			<input type="range" min="0.1" max="3" value="1" id="rate" step="0.1" />
+			<span id="rate-label" class="ms-2">1</span>
+		</div>
+		<div>
+			<p class="lead">Pitch</p>
+			<input type="range" min="0" max="2" value="1" step="0.1" id="pitch" />
+			<span id="pitch-label" class="ms-2">1</span>
+		</div>
+	</div>
+
+    <textarea id="output" class="form-control bg-dark text-light mt-5" cols="30" rows="5">
+Mr.Piggott lived with his two sons, Simon and Patrick, in a nice house with a nice garden, and a nice car in the nice garage.
+Inside the house was his wife.
+“Hurry up with the breakfast, dear” he called every morning before he went off to his very important job.
+“Hurry up with the breakfast, Mom” Simon and Patrick called before they went off to their very important school.
+After they left the house, Mrs.Piggott washed all the breakfast things, mad all the beds, vacuumed all the carpets, and then went to work.
+“Hurry up with the meal, Mom” the boys called every evening when they came home from their very important school.
+“Hurry up with thee meal, old girl” Mr.Piggott called every evening when he came home from his very important job.
+As soon as they had eaten, Mrs.Piggott washed the dishes, washed the clothes, did the ironing, and then cooked some more.
+One evening when the boys got home from school, there was no one to greet them.
+“Where’s Mom?” demanded Mr.Piggott when he got home from work.
+She was nowhere to be found.
+On the mantelpiece was an envelope.
+Mr.Piggott opened it.
+Inside was a piece of paper.
+You are pigs.
+“But what shall we do?” said Mr.Piggott.
+They had to make their own meal.
+It took hours.
+And it was horrible.
+The next morning they had to make their own breakfast.
+It took hours.
+And it was horrible.
+The next day and the next night and the day after that, Mrs.Piggott was still not there.
+Mr.Piggott, Simon, and Patrick tried to take care of themselves.
+They never washed the dishes.
+They never washed the dishes.
+They never washed their clothes.
+Soon the house was like a pigsty
+“When is Mom coming home?” the boys squealed after another horrible meal.
+“How should I know? Mr.Piggott grunted.
+They all became more and more grumpy.
+One night there was nothing in the house for them to cook.
+“We’ll just have to root around and find some scraps” snorted Mr.Piggott.
+And just then Mrs.Piggott walked in.
+“P-L-E-A-S-E come back” they snuffled.
+So Mrs.Piggott stayed
+Mr.Piggott washed the dishes.
+Patrick and Simon made the beds.
+Mr.Piggott did the ironing.
+And they all helped with the cooking.
+Sometimes they even sort of liked it
+Mom was happy too
+She fixed the car
+</textarea>
+
+    <!-- Control Buttons -->
+    <div class="mb-5">
+		<button id="start" class="btn btn-success mt-5 me-3"><i class="bi bi-caret-right-square"></i> Start</button>
+		<button id="pause" class="btn btn-warning mt-5 me-3"><i class="bi bi-pause-fill"></i> Pause</button>
+		<button id="resume" class="btn btn-info mt-5 me-3"><i class="bi bi-skip-start-fill"></i> Resume</button>
+		<button id="cancel" class="btn btn-danger mt-5 me-3"><i class="bi bi-x-circle-fill"></i> Cancel</button>
+    </div>
+
+	<script>
+		let speech = new SpeechSynthesisUtterance();
+
+		// Set Speech Language
+		speech.lang = "en";
+
+		let voices = []; // global array of available voices
+
+		window.speechSynthesis.onvoiceschanged = () => {
+			// Get List of Voices
+			voices = window.speechSynthesis.getVoices();
+
+			// Initially set the First Voice in the Array.
+			speech.voice = voices[0];
+
+			// Set the Voice Select List. (Set the Index as the value, which we'll use later when the user updates the Voice using the Select Menu.)
+			let voiceSelect = document.querySelector("#voices");
+			voices.forEach((voice, i) => (voiceSelect.options[i] = new Option(voice.name, i)));
+		};
+
+		document.querySelector("#rate").addEventListener("input", () => {
+			// Get rate Value from the input
+			const rate = document.querySelector("#rate").value;
+
+			// Set rate property of the SpeechSynthesisUtterance instance
+			speech.rate = rate;
+
+			// Update the rate label
+			document.querySelector("#rate-label").innerHTML = rate;
+		});
+
+		document.querySelector("#volume").addEventListener("input", () => {
+		// Get volume Value from the input
+			const volume = document.querySelector("#volume").value;
+
+			// Set volume property of the SpeechSynthesisUtterance instance
+			speech.volume = volume;
+
+			// Update the volume label
+			document.querySelector("#volume-label").innerHTML = volume;
+		});
+
+		document.querySelector("#pitch").addEventListener("input", () => {
+		// Get pitch Value from the input
+			const pitch = document.querySelector("#pitch").value;
+
+			// Set pitch property of the SpeechSynthesisUtterance instance
+			speech.pitch = pitch;
+
+			// Update the pitch label
+			document.querySelector("#pitch-label").innerHTML = pitch;
+		});
+
+		document.querySelector("#voices").addEventListener("change", () => {
+			// On Voice change, use the value of the select menu (which is the index of the voice in the global voice array)
+			speech.voice = voices[document.querySelector("#voices").value];
+		});
+
+		document.querySelector("#start").addEventListener("click", () => {
+			// Set the text property with the value of the textarea
+			speech.text = document.querySelector("textarea").value;
+			// Start Speaking
+			window.speechSynthesis.speak(speech);
+		});
+
+		document.querySelector("#pause").addEventListener("click", () => {
+			// Pause the speechSynthesis instance
+			window.speechSynthesis.pause();
+		});
+
+		document.querySelector("#resume").addEventListener("click", () => {
+			// Resume the paused speechSynthesis instance
+			window.speechSynthesis.resume();
+		});
+
+		document.querySelector("#cancel").addEventListener("click", () => {
+			// Cancel the speechSynthesis instance
+			window.speechSynthesis.cancel();
+		});
+		
+	</script>
+</body>
+</html>
