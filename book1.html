@@ -14,7 +14,7 @@
 </head>
 <body>
 	<div style="text-align : center;">
-		<img src="photo5.png" class="rounded" width = "500" height ="500" alt="North Wind and the Sun"/>
+		<img src="photo1.png" class="rounded" width = "500" height ="500" alt="The Three Little Pigs"/>
 	</div>
 </body>
 
@@ -57,17 +57,34 @@
 	</div>
 
     <textarea id="output" class="form-control bg-dark text-light mt-5" cols="30" rows="15">
-The North Wind and the Sun had a quarrel about which of them was the stronger. 
-While they were disputing with much heat and bluster, a Traveler passed along the road wrapped in a cloak.
-"Let us agree," said the Sun, "that he is the stronger who can strip that Traveler of his cloak."
-"Very well," growled the North Wind, and at once sent a cold, howling blast against the Traveler.
-With the first gust of wind the ends of the cloak whipped about the Traveler's body. 
-But he immediately wrapped it closely around him, and the harder the Wind blew, the tighter he held it to him. The North Wind tore angrily at the cloak, but all his efforts were in vain.
-Then the Sun began to shine. At first his beams were gentle, and in the pleasant warmth after the bitter cold of the North Wind, the Traveler unfastened his cloak and let it hang loosely from his shoulders. 
-The Sun's rays grew warmer and warmer. 
-The man took off his cap and mopped his brow. 
-At last he became so heated that he pulled off his cloak, and, to escape the blazing sunshine, threw himself down in the welcome shade of a tree by the roadside.
-Gentleness and kind persuasion win where force and bluster fail.
+The three little pigs build new houses. 
+The first little pig builds a house of straw. 
+The second little pig builds a house of wood. 
+The house is pretty. 
+He likes it very much. 
+The third little pig builds a house of bricks. 
+He is happy. 
+One day, a big bad wolf goes to the house of straw. 
+He wants to eat the first little pig. 
+The wolf huffs and puffs. He blows the house down. 
+The first little pig runs to the house of wood. 
+The wolf goes to the house of wood. 
+He wants to eat the pigs. 
+The wolf huffs and puffs. 
+He blows the house down. 
+The two little pigs run to the house of bricks.
+They knock on the door. 
+The wolf goes to the house of bricks. 
+He huffs and puffs. 
+His face turns red. He huffs again. 
+But the house is still. 
+The wolf climbs up on the roof. 
+The third little pig is making soup. 
+The soup is hot. 
+The wolf jumps down the chimney.
+Splash! He falls in the hot soup. 
+The third little pig eats the soup. 
+It is good.
 </textarea>
 
     <!-- Control Buttons -->
@@ -81,80 +98,62 @@ Gentleness and kind persuasion win where force and bluster fail.
 	<script>
 		let speech = new SpeechSynthesisUtterance();
 
-		// Set Speech Language
 		speech.lang = "en";
 
-		let voices = []; // global array of available voices
+		let voices = []; 
 
 		window.speechSynthesis.onvoiceschanged = () => {
-			// Get List of Voices
 			voices = window.speechSynthesis.getVoices();
 
-			// Initially set the First Voice in the Array.
 			speech.voice = voices[0];
 
-			// Set the Voice Select List. (Set the Index as the value, which we'll use later when the user updates the Voice using the Select Menu.)
 			let voiceSelect = document.querySelector("#voices");
 			voices.forEach((voice, i) => (voiceSelect.options[i] = new Option(voice.name, i)));
 		};
 
 		document.querySelector("#rate").addEventListener("input", () => {
-			// Get rate Value from the input
 			const rate = document.querySelector("#rate").value;
 
-			// Set rate property of the SpeechSynthesisUtterance instance
 			speech.rate = rate;
 
-			// Update the rate label
 			document.querySelector("#rate-label").innerHTML = rate;
 		});
 
 		document.querySelector("#volume").addEventListener("input", () => {
-		// Get volume Value from the input
 			const volume = document.querySelector("#volume").value;
 
-			// Set volume property of the SpeechSynthesisUtterance instance
 			speech.volume = volume;
 
-			// Update the volume label
 			document.querySelector("#volume-label").innerHTML = volume;
 		});
 
 		document.querySelector("#pitch").addEventListener("input", () => {
-		// Get pitch Value from the input
 			const pitch = document.querySelector("#pitch").value;
 
-			// Set pitch property of the SpeechSynthesisUtterance instance
 			speech.pitch = pitch;
 
-			// Update the pitch label
 			document.querySelector("#pitch-label").innerHTML = pitch;
 		});
 
 		document.querySelector("#voices").addEventListener("change", () => {
-			// On Voice change, use the value of the select menu (which is the index of the voice in the global voice array)
 			speech.voice = voices[document.querySelector("#voices").value];
 		});
 
 		document.querySelector("#start").addEventListener("click", () => {
-			// Set the text property with the value of the textarea
 			speech.text = document.querySelector("textarea").value;
-			// Start Speaking
+
 			window.speechSynthesis.speak(speech);
 		});
 
 		document.querySelector("#pause").addEventListener("click", () => {
-			// Pause the speechSynthesis instance
 			window.speechSynthesis.pause();
 		});
 
 		document.querySelector("#resume").addEventListener("click", () => {
-			// Resume the paused speechSynthesis instance
 			window.speechSynthesis.resume();
 		});
 
 		document.querySelector("#cancel").addEventListener("click", () => {
-			// Cancel the speechSynthesis instance
 			window.speechSynthesis.cancel();
 		});
 		

@@ -14,12 +14,9 @@
 </head>
 <body>
 	<div style="text-align : center;">
-		<img src="photo3.png" class="rounded" width = "500" height ="500" alt="The Ants and the Grasshopper"/>
+		<img src="photo4.png" class="rounded" width = "500" height ="500" alt="The Fox and the Stork"/>
 	</div>
 </body>
-
-
-
 
 
 <html lang="en">
@@ -58,23 +55,19 @@
 	</div>
 
     <textarea id="output" class="form-control bg-dark text-light mt-5" cols="30" rows="15">
-In a field one summer's day a grasshopper was hopping about, chirping and singing to its heart's content.  
-A group of ants walked by, grunting as they struggled to carry plump kernels of corn.
-"Where are you going with those heavy things?" asked the grasshopper.
-Without stopping, the first ant replied, "To our ant hill.  
-This is the third kernel I've delivered today."
-"Why not come and sing with me," teased the grasshopper, "instead of working so hard?" 
-"We are helping to store food for the winter," said the ant, "and think you should do the same."  
-"Winter is far away and it is a glorious day to play," sang the grasshopper.
-But the ants went on their way and continued their hard work.
-The weather soon turned cold.  
-All the food lying in the field was covered with a thick white blanket of snow that even the grasshopper could not dig through.  
-Soon the grasshopper found itself dying of hunger.
-He staggered to the ants' hill and saw them handing out corn from the stores they had collected in the summer.  
-He begged them for something to eat.
-"What!" cried the ants in surprise, "haven't you stored anything away for the winter?  What in the world were you doing all last summer?" 
-"I didn't have time to store any food," complained the grasshopper; "I was so busy playing music that before I knew it the summer was gone." 
-The ants shook their heads in disgust, turned their backs on the grasshopper and went on with their work.
+The Fox one day thought of a plan to amuse himself at the expense of the Stork, at whose odd appearance he was always laughing.
+"You must come and dine with me today," he said to the Stork, smiling to himself at the trick he was going to play. The Stork gladly accepted the invitation and arrived in good time and with a very good appetite.
+For dinner the Fox served soup. 
+But it was set out in a very shallow dish, and all the Stork could do was to wet the very tip of his bill. 
+Not a drop of soup could he get. 
+But the Fox lapped it up easily, and, to increase the disappointment of the Stork, made a great show of enjoyment.
+The hungry Stork was much displeased at the trick, but he was a calm, even-tempered fellow and saw no good in flying into a rage.
+Instead, not long afterward, he invited the Fox to dine with him in turn. 
+The Fox arrived promptly at the time that had been set, and the Stork served a fish dinner that had a very appetizing smell. 
+But it was served in a tall jar with a very narrow neck. 
+The Stork could easily get at the food with his long bill, but all the Fox could do was to lick the outside of the jar, and sniff at the delicious odor. 
+And when the Fox lost his temper, the Stork said calmly:
+Do not play tricks on your neighbors unless you can stand the same treatment yourself.
 </textarea>
 
     <!-- Control Buttons -->
@@ -88,80 +81,60 @@ The ants shook their heads in disgust, turned their backs on the grasshopper and
 	<script>
 		let speech = new SpeechSynthesisUtterance();
 
-		// Set Speech Language
 		speech.lang = "en";
 
-		let voices = []; // global array of available voices
-
+		let voices = []; 
 		window.speechSynthesis.onvoiceschanged = () => {
-			// Get List of Voices
 			voices = window.speechSynthesis.getVoices();
 
-			// Initially set the First Voice in the Array.
 			speech.voice = voices[0];
 
-			// Set the Voice Select List. (Set the Index as the value, which we'll use later when the user updates the Voice using the Select Menu.)
 			let voiceSelect = document.querySelector("#voices");
 			voices.forEach((voice, i) => (voiceSelect.options[i] = new Option(voice.name, i)));
 		};
 
 		document.querySelector("#rate").addEventListener("input", () => {
-			// Get rate Value from the input
 			const rate = document.querySelector("#rate").value;
 
-			// Set rate property of the SpeechSynthesisUtterance instance
 			speech.rate = rate;
 
-			// Update the rate label
 			document.querySelector("#rate-label").innerHTML = rate;
 		});
 
 		document.querySelector("#volume").addEventListener("input", () => {
-		// Get volume Value from the input
 			const volume = document.querySelector("#volume").value;
 
-			// Set volume property of the SpeechSynthesisUtterance instance
 			speech.volume = volume;
 
-			// Update the volume label
 			document.querySelector("#volume-label").innerHTML = volume;
 		});
 
 		document.querySelector("#pitch").addEventListener("input", () => {
-		// Get pitch Value from the input
 			const pitch = document.querySelector("#pitch").value;
 
-			// Set pitch property of the SpeechSynthesisUtterance instance
 			speech.pitch = pitch;
 
-			// Update the pitch label
 			document.querySelector("#pitch-label").innerHTML = pitch;
 		});
 
 		document.querySelector("#voices").addEventListener("change", () => {
-			// On Voice change, use the value of the select menu (which is the index of the voice in the global voice array)
 			speech.voice = voices[document.querySelector("#voices").value];
 		});
 
 		document.querySelector("#start").addEventListener("click", () => {
-			// Set the text property with the value of the textarea
 			speech.text = document.querySelector("textarea").value;
-			// Start Speaking
 			window.speechSynthesis.speak(speech);
 		});
 
 		document.querySelector("#pause").addEventListener("click", () => {
-			// Pause the speechSynthesis instance
 			window.speechSynthesis.pause();
 		});
 
 		document.querySelector("#resume").addEventListener("click", () => {
-			// Resume the paused speechSynthesis instance
 			window.speechSynthesis.resume();
 		});
 
 		document.querySelector("#cancel").addEventListener("click", () => {
-			// Cancel the speechSynthesis instance
 			window.speechSynthesis.cancel();
 		});
 		
