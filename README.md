@@ -18,3 +18,4 @@ And you can make your own book to read.
 <img src = "https://user-images.githubusercontent.com/73635543/143480514-d44270c9-2d2b-4ac3-998c-f038d27e943a.png" width="250" height="250">   
 
 ## Short Demo Video  
+[![Video Label](http://img.youtube.com/vi/hG3KDQm-HE0/0.jpg)](https://youtu.be/hG3KDQm-HE0)
